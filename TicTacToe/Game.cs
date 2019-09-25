@@ -33,7 +33,7 @@ namespace TicTacToe
             {
                 return "Draw";
             }
-            else if (playerOWins())
+            else if (playerWins("O"))
             {
                 return "O";
             }
@@ -47,21 +47,32 @@ namespace TicTacToe
             }
         }
 
-        private bool playerOWins() 
+        private bool playerWins(string symbol) 
         {
-            return board.CurrentMarks().Contains(Tuple.Create(1, "O"))
-            && board.CurrentMarks().Contains(Tuple.Create(2, "O"))
-            && board.CurrentMarks().Contains(Tuple.Create(3, "O"));
+            foreach(Tuple<int,int,int> combination in winningCombinations())
+            {
+                if (threeInARow(symbol, combination)) return true;
+            }
+            return false;
         }
 
         private bool playerXWins()
         {
-            return threeInARow("X", 1,2,3) || threeInARow("X", 4,5,6) || threeInARow("X", 7,8,9) || threeInARow("X", 1,4,7) || threeInARow("X", 2,5,8) || threeInARow("X", 3,6,9) || threeInARow("X", 1,5,9) || threeInARow("X", 3,5,7);
+            foreach(Tuple<int,int,int> combination in winningCombinations())
+            {
+                bool result = threeInARow("X", combination);
+                if (result == true)
+                    return true;
+                
+            }
+            //return false;
+
+            return threeInARow("X", 2,5,8) || threeInARow("X", 3,6,9) || threeInARow("X", 1,5,9) || threeInARow("X", 3,5,7);
         }
 
-        private List<Tuple<int,int,int>> winningCombinations() 
+        private List<Tuple<int,int,int>> winningCombinations()
         {
-            Tuple<int,int,int>[] combinations = {};
+            Tuple<int,int,int>[] combinations = {Tuple.Create(1,2,3), Tuple.Create(4,5,6), Tuple.Create(7, 8, 9), Tuple.Create(1,4,7)};
             return new List<Tuple<int,int,int>>(combinations);
         }
 
