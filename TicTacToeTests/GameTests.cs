@@ -8,6 +8,8 @@ namespace TicTacToeTests
 {
     class GameTests
     {
+
+
         [Test]
         public void PlayerOneCanMakeAMoveInANewGame()
         {
@@ -76,19 +78,6 @@ namespace TicTacToeTests
         }
 
         [Test]
-        public void AGameCanHaveAWinnerOfO()
-        {
-            Game game = new Game();
-            game.Move(1);
-            game.Move(4);
-            game.Move(2);
-            game.Move(5);
-            game.Move(7);
-            game.Move(6);
-            Assert.AreEqual(game.Status(), "O");
-        }
-
-        [Test]
         public void XWinsInTopRow()
         {
             Game game = new Game();
@@ -123,5 +112,79 @@ namespace TicTacToeTests
             game.Move(9);
             Assert.AreEqual(game.Status(), "X");
         }
+
+        [Test]
+        public void XWinsLeftVerticalRow()
+        {
+            Game game = new Game();
+            game.Move(1);
+            game.Move(2);
+            game.Move(4);
+            game.Move(3);
+            game.Move(7);
+            Assert.AreEqual("X", game.Status());
+        }
+
+        [Test]
+        public void XWinsMiddleVerticalRow()
+        {
+            Game game = new Game();
+            game.Move(2);
+            game.Move(3);
+            game.Move(5);
+            game.Move(4);
+            game.Move(8);
+            Assert.AreEqual("X", game.Status());
+        }
+
+        [Test]
+        public void XWinsRightVerticalRow()
+        {
+            Game game = new Game();
+            game.Move(3);
+            game.Move(2);
+            game.Move(6);
+            game.Move(4);
+            game.Move(9);
+            Assert.AreEqual("X", game.Status());
+        }
+        [Test]
+        public void XWinsDiagnolLeftToRightlRow()
+        {
+            Game game = new Game();
+            game.Move(1);
+            game.Move(2);
+            game.Move(5);
+            game.Move(3);
+            game.Move(9);
+            Assert.AreEqual("X", game.Status());
+        }
+
+        [Test]
+        public void OWinsInTopRow()
+        {
+            Game game = new Game();
+            game.Move(4);
+            game.Move(1);
+            game.Move(5);
+            game.Move(2);
+            game.Move(7);
+            game.Move(3);
+            Assert.AreEqual("O", game.Status());
+        }
+
+        [Test]
+        public void OWinsMiddleRow()
+        {
+            Game game = new Game();
+            game.Move(1);
+            game.Move(4);
+            game.Move(7);
+            game.Move(5);
+            game.Move(8);
+            game.Move(6);
+            Assert.AreEqual("O", game.Status());
+        }
+
     }
 }
