@@ -65,14 +65,12 @@ namespace TicTacToe
                     return true;
                 
             }
-            //return false;
-
-            return threeInARow("X", 2,5,8) || threeInARow("X", 3,6,9) || threeInARow("X", 1,5,9) || threeInARow("X", 3,5,7);
+            return false;
         }
 
         private List<Tuple<int,int,int>> winningCombinations()
         {
-            Tuple<int,int,int>[] combinations = {Tuple.Create(1,2,3), Tuple.Create(4,5,6), Tuple.Create(7, 8, 9), Tuple.Create(1,4,7)};
+            Tuple<int,int,int>[] combinations = {Tuple.Create(1,2,3), Tuple.Create(4,5,6), Tuple.Create(7, 8, 9), Tuple.Create(1,4,7), Tuple.Create(2,5,8), Tuple.Create(3,6,9), Tuple.Create(1,5, 9), Tuple.Create(3,5,7)};
             return new List<Tuple<int,int,int>>(combinations);
         }
 
