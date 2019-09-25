@@ -6,8 +6,27 @@ namespace TicTacToe
 {
     public class Game
     {
-        private Board board = new Board();
-        private String currentMark = "X";
+        private readonly Board board;
+        private readonly string playerOneSymbol;
+        private readonly string playerTwoSymbol;
+        private string currentMark;
+
+        public Game()
+        {
+            board = new Board();
+            playerOneSymbol = "X";
+            playerTwoSymbol = "O";
+            currentMark = "X";
+        }
+
+        public void GetMoveFromUser()
+        {
+            string userInput = Console.ReadLine();
+            int convertedInput = Int32.Parse(userInput);
+            Move(convertedInput);
+        }
+
+        public void start() {}
 
         public List<Tuple<int, string>> CurrentMarks()
         {
@@ -23,14 +42,14 @@ namespace TicTacToe
         public string Status()
         {
             if (isDraw()) return "Draw";
-            else if (playerWins("O")) return "O";
-            else if (playerWins("X")) return "X";
+            else if (playerWins(playerOneSymbol)) return playerOneSymbol;
+            else if (playerWins(playerTwoSymbol)) return playerTwoSymbol;
             else return "In Progress";
         }
 
         private void endTurn()
         {
-            currentMark = currentMark == "X" ? "O" : "X";
+            currentMark = currentMark == playerOneSymbol ? playerTwoSymbol : playerOneSymbol;
         }
 
         private bool playerWins(string symbol) 

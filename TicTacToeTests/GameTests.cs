@@ -186,5 +186,14 @@ namespace TicTacToeTests
             Assert.AreEqual("O", game.Status());
         }
 
+        [Test]
+        public void APlayerCanMarkTheBoard()
+        {
+            Game game = new Game();
+            game.GetMoveFromUser();
+            Tuple<int, string>[] currentMarks = {Tuple.Create(5, "X")}; // Player entered the number 5
+            Assert.AreEqual(currentMarks, game.CurrentMarks());
+        }
+
     }
 }
