@@ -10,6 +10,7 @@ namespace TicTacToe
         private readonly string playerOneSymbol;
         private readonly string playerTwoSymbol;
         private string currentMark;
+        private IIO inputOutput;
 
         public Game()
         {
@@ -17,13 +18,24 @@ namespace TicTacToe
             playerOneSymbol = "X";
             playerTwoSymbol = "O";
             currentMark = "X";
+            inputOutput = new IO();
+        }
+
+        public Game(IIO io)
+        {
+            board = new Board();
+            playerOneSymbol = "X";
+            playerTwoSymbol = "O";
+            currentMark = "X";
+            inputOutput = io;
         }
 
         public void GetMoveFromUser()
         {
-            string userInput = Console.ReadLine();
+            string userInput = inputOutput.Read();
             int convertedInput = Int32.Parse(userInput);
             Move(convertedInput);
+           
         }
 
         public void start() {}
@@ -50,6 +62,7 @@ namespace TicTacToe
         private void endTurn()
         {
             currentMark = currentMark == playerOneSymbol ? playerTwoSymbol : playerOneSymbol;
+            inputOutput.Write(currentMark);
         }
 
         private bool playerWins(string symbol) 

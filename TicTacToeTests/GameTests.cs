@@ -189,11 +189,28 @@ namespace TicTacToeTests
         [Test]
         public void APlayerCanMarkTheBoard()
         {
-            Game game = new Game();
+            Game game = new Game(new MockIO());
             game.GetMoveFromUser();
-            Tuple<int, string>[] currentMarks = {Tuple.Create(5, "X")}; // Player entered the number 5
+            Tuple<int, string>[] currentMarks = {Tuple.Create(5, "X")};
             Assert.AreEqual(currentMarks, game.CurrentMarks());
         }
 
+        [Test]
+        public void WhenTurnEndsDisplayBoard()
+        {
+            MockIO mockIO = new MockIO();
+            Game game = new Game(mockIO);
+            game.GetMoveFromUser();
+            Assert.AreEqual(true, mockIO.writeWasCalled);
+        }
+
+        // [Test]
+        // public void ItDisplaysTheCorrectCellsInTheOutput()
+        // {
+        //     MockIO mockIO = new MockIO();
+        //     Game game = new Game(mockIO);
+        //     game.Move(7);
+        //     Assert.AreEqual(mockIO.inputThatWasGivenToWrite, "[_,_,_,_,_,_,X,_,_]");
+        // }
     }
 }
