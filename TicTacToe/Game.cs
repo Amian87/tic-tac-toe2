@@ -17,34 +17,20 @@ namespace TicTacToe
         public void Move(int position)
         {
             board.Move(position, currentMark);
-            if(currentMark == "X")
-            {
-                currentMark = "O";
-            }
-            else
-            {
-                currentMark = "X";
-            }
+            endTurn();
         }
 
         public string Status()
         {
-            if (isDraw())
-            {
-                return "Draw";
-            }
-            else if (playerWins("O"))
-            {
-                return "O";
-            }
-            else if (playerXWins())
-            {
-                return "X";
-            }
-            else
-            {
-                return "In Progress";
-            }
+            if (isDraw()) return "Draw";
+            else if (playerWins("O")) return "O";
+            else if (playerWins("X")) return "X";
+            else return "In Progress";
+        }
+
+        private void endTurn()
+        {
+            currentMark = currentMark == "X" ? "O" : "X";
         }
 
         private bool playerWins(string symbol) 
@@ -52,18 +38,6 @@ namespace TicTacToe
             foreach(Tuple<int,int,int> combination in winningCombinations())
             {
                 if (threeInARow(symbol, combination)) return true;
-            }
-            return false;
-        }
-
-        private bool playerXWins()
-        {
-            foreach(Tuple<int,int,int> combination in winningCombinations())
-            {
-                bool result = threeInARow("X", combination);
-                if (result == true)
-                    return true;
-                
             }
             return false;
         }
@@ -79,13 +53,6 @@ namespace TicTacToe
             return board.CurrentMarks().Contains(Tuple.Create(winningCombination.Item1, symbol))
             && board.CurrentMarks().Contains(Tuple.Create(winningCombination.Item2, symbol))
             && board.CurrentMarks().Contains(Tuple.Create(winningCombination.Item3, symbol));
-        }
-
-        private bool threeInARow(string symbol, int positionOne, int positionTwo, int positionThree)
-        {
-            return board.CurrentMarks().Contains(Tuple.Create(positionOne, symbol))
-            && board.CurrentMarks().Contains(Tuple.Create(positionTwo, symbol))
-            && board.CurrentMarks().Contains(Tuple.Create(positionThree, symbol));
         }
 
         private bool isDraw()
