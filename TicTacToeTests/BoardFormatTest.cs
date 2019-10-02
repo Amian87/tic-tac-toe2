@@ -33,5 +33,32 @@ namespace TicTacToeTests
             board.Move(2, "X");
             Assert.AreEqual(boardFormat.Convert(), "[_,X,_,_,_,_,_,_,_]");
         }
+
+        [Test]
+        public void ItMovesInSpotThree()
+        {
+            Board board = new Board();
+            BoardFormat boardFormat = new BoardFormat(board);
+            board.Move(3, "X");
+            Assert.AreEqual(boardFormat.Convert(), "[_,_,X,_,_,_,_,_,_]");
+        }
+
+        [Test]
+        public void ItMovesInSpotTwoWithAnotherSymbol()
+        {
+            Board board = new Board();
+            BoardFormat boardFormat = new BoardFormat(board);
+            board.Move(2, "O");
+            Assert.AreEqual(boardFormat.Convert(), "[_,O,_,_,_,_,_,_,_]");
+        }
+
+        [Test]
+        public void ItMovesInSpotEightWithAnotherSymbol()
+        {
+            Board board = new Board();
+            BoardFormat boardFormat = new BoardFormat(board);
+            board.Move(8, "O");
+            Assert.AreEqual(boardFormat.Convert(), "[_,_,_,_,_,_,_,O,_]");
+        }
     }
 }
